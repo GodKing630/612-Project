@@ -31,5 +31,3 @@ baseUrl = 'https://nh.craigslist.org/search/mca'
 
 print("results: " + str(results))
 
-for i in results:
-    print("i: " + str(i))
