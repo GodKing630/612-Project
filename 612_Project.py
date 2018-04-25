@@ -8,7 +8,6 @@ import csv
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import argparse
-#Worked with Will Clark
 parser = argparse.ArgumentParser(description = 'Takes in filters for craigslist search (exclusively for motorcycles and cars)')
 parser.add_argument("-mi", "--miles", help="Miles from zip (default: None)", action="store", dest="miles", default=None)
 parser.add_argument("-z", "--zip", help="Zipcode (default: None)", action="store", dest="zip", default=None)
