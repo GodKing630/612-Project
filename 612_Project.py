@@ -1,14 +1,16 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Tue Apr 24 20:37:04 2018
-@program: 612 Project
-@author: aleew
 """
-import csv
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
+
+
+#import csv
+#from urllib.request import urlopen
+#from bs4 import BeautifulSoup
 import argparse
-parser = argparse.ArgumentParser(description = 'Takes in filters for craigslist search (exclusively for motorcycles and cars)')
+
+parser = argparse.ArgumentParser(description='Takes in filters for craigslist search (exclusively for motorcycles and cars)')
 parser.add_argument("-mi", "--miles", help="Miles from zip (default: None)", action="store", dest="miles", default=None)
 parser.add_argument("-z", "--zip", help="Zipcode (default: None)", action="store", dest="zip", default=None)
 parser.add_argument("-minp", "--min_price", help="Minimum price of the item (default: None)", action="store", dest="minp", default=None)
@@ -27,32 +29,43 @@ parser.add_argument("-ti", "--title", help="Title status (Options: clean, salvag
 parser.add_argument("-tr", "--trans", help="Transmission (Options: manual, automatic, other) (default: None)", action="store", dest="trans", default=None)
 parser.add_argument("-l", "--location", help="Location of the item (default: None)", action="store", dest="location", default=None)
 results = parser.parse_args()
-baseUrl = 'https://nh.craigslist.org/search/mca'
+baseUrl = 'https://boston.craigslist.org/search/sss?sort=rel'
 
-print("results: " + str(results))
-
-mylist = []
-
-html = urlopen("https://nh.craigslist.org/search/mca")
-
-soup = BeautifulSoup(html, "html.parser")
-
-for x in soup.find_all("li", {"class":"result-row"})[1:]:
+#print("results: " + str(results))
+location=''
+miles=''
+if results.location:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.miles:
+    miles= "&search_distance=" + str(results.miles)
+    baseUrl = baseUrl + miles
+  
+print(baseUrl)    
     
-    for n in x.find_all("time", {"class":"result-date"}):
-        time = (n['title'])
-        
-    for a in x.find_all('a', {"class":"result-title"}, href=True):
-        href = a['href']
-    a = x.find_all("a")
-    data = time, a[1].text, "https://nh.craigslist.org"+href
-    mylist.append(data)
-    
-for i in mylist:
-    print(i, "\n")
-
-with open('Boston area.csv', 'a') as outcsv:   
-    writer = csv.writer(outcsv, delimiter=',', quotechar=',', quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
-    for item in mylist:
-        writer.writerow(item)
-    
+#mylist = []
+#
+#html = urlopen("https://nh.craigslist.org/search/mca")
+#
+#soup = BeautifulSoup(html, "html.parser")
+#
+#for x in soup.find_all("li", {"class":"result-row"})[1:]:
+#    
+#    for n in x.find_all("time", {"class":"result-date"}):
+#        time = (n['title'])
+#        
+#    for a in x.find_all('a', {"class":"result-title"}, href=True):
+#        href = a['href']
+#    a = x.find_all("a")
+#    data = time, a[1].text, "https://nh.craigslist.org"+href
+#    mylist.append(data)
+#    
+#for i in mylist:
+#    pass
+#    #print(i, "\n")
+#
+#with open('Boston area.csv', 'a') as outcsv:   
+#    writer = csv.writer(outcsv, delimiter=',', quotechar=',', quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
+#    for item in mylist:
+#        writer.writerow(item)
+#    
