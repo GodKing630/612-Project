@@ -32,14 +32,72 @@ results = parser.parse_args()
 baseUrl = 'https://boston.craigslist.org/search/sss?sort=rel'
 
 #print("results: " + str(results))
+
+baseUrl = 'https://boston.craigslist.org/search/sss?sort=rel'
+
+#print("results: " + str(results))
 location=''
 miles=''
+make=''
+model=''
+
+if results.miles:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.zip:
+    miles= "&search_distance=" + str(results.miles)
+    baseUrl = baseUrl + miles
+if results.min_price:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.max_price:
+    miles= "&search_distance=" + str(results.miles)
+    baseUrl = baseUrl + miles
+if results.make:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.model:
+    miles= "&search_distance=" + str(results.miles)
+    baseUrl = baseUrl + miles
+if results.min_eng_disp:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.max_eng_disp:
+    miles= "&search_distance=" + str(results.miles)
+    baseUrl = baseUrl + miles
+if results.min_year:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.max_year:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.min_odo:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.max_odo:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.condition:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.fuel:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.color:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.title:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
+if results.trans:
+    location= "&postal=" + str(results.location)
+    baseUrl = baseUrl + location
 if results.location:
     location= "&postal=" + str(results.location)
     baseUrl = baseUrl + location
-if results.miles:
-    miles= "&search_distance=" + str(results.miles)
-    baseUrl = baseUrl + miles
+
+  
+print(baseUrl)        
   
 print(baseUrl)    
     
