@@ -13,7 +13,8 @@ parser.add_argument("-mi", "--miles", help="Miles from zip (default: None)", act
 parser.add_argument("-z", "--zip", help="Zipcode (default: None)", action="store", dest="zip", default=None)
 parser.add_argument("-minp", "--min_price", help="Minimum price of the item (default: None)", action="store", dest="minp", default=None)
 parser.add_argument("-maxp", "--max_price", help="Maximum price of the item (default: None)", action="store", dest="maxp", default=None)
-parser.add_argument("-ma", "--make", help="Make/Model of the item (default: None)", action="store", dest="make", default=None)
+parser.add_argument("-ma", "--make", help="Make of the item (default: None)", action="store", dest="make", default=None)
+parser.add_argument("-mo", "--model", help="Model of the item (default: None)", action="store", dest="model", default=None)
 parser.add_argument("-minen", "--min_eng_disp", help="Minimum engine displacement (default: None)", action="store", dest="minen", default=None)
 parser.add_argument("-maxen", "--max_eng_disp", help="Maximum engine displacement (default: None)", action="store", dest="maxen", default=None)
 parser.add_argument("-miny", "--min_year", help="Minimum model year (default: None)", action="store", dest="miny", default=None)
@@ -27,32 +28,30 @@ parser.add_argument("-ti", "--title", help="Title status (Options: clean, salvag
 parser.add_argument("-tr", "--trans", help="Transmission (Options: manual, automatic, other) (default: None)", action="store", dest="trans", default=None)
 parser.add_argument("-l", "--location", help="Location of the item (default: None)", action="store", dest="location", default=None)
 results = parser.parse_args()
-baseUrl = 'https://nh.craigslist.org/search/mca'
-
-print("results: " + str(results))
-
+baseUrl = 'https://nh.craigslist.org/search/mca' 
+print(type(results))
+count = 0
+for k in results.__dict__:
+    if results.__dict__[k] != None:
+        count += 1
+    print(results.__dict__[k])
 mylist = []
 
 html = urlopen("https://nh.craigslist.org/search/mca")
 
-soup = BeautifulSoup(html, "html.parser")
-
-for x in soup.find_all("li", {"class":"result-row"})[1:]:
-    
-    for n in x.find_all("time", {"class":"result-date"}):
-        time = (n['title'])
-        
-    for a in x.find_all('a', {"class":"result-title"}, href=True):
-        href = a['href']
-    a = x.find_all("a")
-    data = time, a[1].text, "https://nh.craigslist.org"+href
-    mylist.append(data)
-    
-for i in mylist:
-    print(i, "\n")
-
-with open('Boston area.csv', 'a') as outcsv:   
-    writer = csv.writer(outcsv, delimiter=',', quotechar=',', quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
-    for item in mylist:
-        writer.writerow(item)
+#soup = BeautifulSoup(html, "html.parser")
+#
+#for x in soup.find_all("li", {"class":"result-row"})[1:]:
+#    
+#    for n in x.find_all("time", {"class":"result-date"}):
+#        time = (n['title'])
+#        
+#    for a in x.find_all('a', {"class":"result-title"}, href=True):
+#        href = a['href']
+#    a = x.find_all("a")
+#    data = time, a[1].text, "https://nh.craigslist.org"+href
+#    mylist.append(data)
+#    
+#for i in mylist:
+    #print(i, "\n")
     
