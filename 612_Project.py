@@ -33,7 +33,7 @@ print("results: " + str(results))
 
 mylist = []
 
-baseUrl = urlopen("https://nh.craigslist.org/search/mca")
+html = urlopen("https://nh.craigslist.org/search/mca")
 
 soup = BeautifulSoup(html, "html.parser")
 
