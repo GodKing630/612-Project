@@ -30,7 +30,7 @@ parser.add_argument("-ti", "--title", help="Title status (Options: clean, salvag
 parser.add_argument("-tr", "--trans", help="Transmission (Options: manual, automatic, other) (default: None)", action="store", dest="trans", default=None)
 parser.add_argument("-l", "--location", help="Location of the item (default: None)", action="store", dest="location", default=None)
 results = parser.parse_args()
-<<<<<<< HEAD
+
 baseUrl = 'https://boston.craigslist.org/search/sss?sort=rel'
 
 #print("results: " + str(results))
@@ -44,17 +44,17 @@ if results.miles:
     baseUrl = baseUrl + miles
   
 print(baseUrl)    
-=======
-baseUrl = 'https://nh.craigslist.org/search/mca' 
-print(type(results))
-count = 0
-for k in results.__dict__:
-    if results.__dict__[k] != None:
-        count += 1
-    print(results.__dict__[k])
-mylist = []
-
-html = urlopen("https://nh.craigslist.org/search/mca")
+#
+#baseUrl = 'https://nh.craigslist.org/search/mca' 
+#print(type(results))
+#count = 0
+#for k in results.__dict__:
+#    if results.__dict__[k] != None:
+#        count += 1
+#    print(results.__dict__[k])
+#mylist = []
+#
+#html = urlopen("https://nh.craigslist.org/search/mca")
 
 #soup = BeautifulSoup(html, "html.parser")
 #
