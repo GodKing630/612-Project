@@ -31,3 +31,28 @@ baseUrl = 'https://nh.craigslist.org/search/mca'
 
 print("results: " + str(results))
 
+mylist = []
+
+baseUrl = urlopen("https://nh.craigslist.org/search/mca")
+
+soup = BeautifulSoup(html, "html.parser")
+
+for x in soup.find_all("li", {"class":"result-row"})[1:]:
+    
+    for n in x.find_all("time", {"class":"result-date"}):
+        time = (n['title'])
+        
+    for a in x.find_all('a', {"class":"result-title"}, href=True):
+        href = a['href']
+    a = x.find_all("a")
+    data = time, a[1].text, "https://nh.craigslist.org"+href
+    mylist.append(data)
+    
+for i in mylist:
+    print(i, "\n")
+
+with open('Boston area.csv', 'a') as outcsv:   
+    writer = csv.writer(outcsv, delimiter=',', quotechar=',', quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
+    for item in mylist:
+        writer.writerow(item)
+    
